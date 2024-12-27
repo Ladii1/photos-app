@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import { Link } from "lucide-react";
+import { Heart } from "@/components/icon/heart";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,9 +35,11 @@ function SideMenu() {
           </h2>
           <div className="space-y-1">
             <Button
+            asChild
               variant="ghost"
               className="w-full justify-start flex gap-2"
             >
+              <Link href="/gallery">
               <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -50,9 +54,10 @@ function SideMenu() {
                     d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
                   />
                 </svg>
-                Gallery
-            
+                Gallery</Link>
             </Button>
+
+
             <Button
               variant="ghost"
               className="w-full justify-start flex gap-2"
@@ -75,17 +80,11 @@ function SideMenu() {
                 Albums
             </Button>
             
-            <Button
-              variant="ghost"
-              className="w-full justify-start flex gap-2"
-            >
-              
-            </Button>
-            <Button
-              variant="ghost"
-              className="w-full justify-start flex gap-2"
-            >
+            <Button asChild variant="ghost" className="w-full justify-start flex gap-2">
+              <Link href="/favorites">
+                <Heart/>
                 Favorites
+                </Link>
               </Button>
           </div>
         </div>
