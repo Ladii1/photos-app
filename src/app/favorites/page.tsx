@@ -4,7 +4,7 @@ import { SearchResult } from "../gallery/page";
 
 export default async function FavoritesPage() {
 
-   const result = (await cloudinary.v2.search
+   const results = (await cloudinary.v2.search
     .expression('resource_type:image AND tags=favorite')
     .sort_by('created_at','desc')
     .with_field("tags")
@@ -19,8 +19,9 @@ export default async function FavoritesPage() {
             </div>
 
             <div className="grid grid-cols-4 gap-4">
-                {result.resources.map((result) =>( 
+                {results.resources.map((result) =>( 
                     <GalleryImage
+                    path = "/favorite"
                         key={result.public_id}
                         imageData = {result} 
                         width="400"

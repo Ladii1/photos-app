@@ -1,10 +1,10 @@
 import type { NextConfig } from "next";
 
-const nextConfig = {
+const nextConfig: NextConfig = {
   /* config options here */
-  experimental : {
-    serverActions: true,
-  },
+    experimental : {
+      serverActions: true,
+    },
 };
 
 export default nextConfig;

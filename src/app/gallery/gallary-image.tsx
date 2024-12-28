@@ -6,37 +6,40 @@ import { useTransition } from "react";
 import { SearchResult } from "./page";
 import { FullHeart } from "@/components/icon/fullheart";
 
-export function GalleryImage(props :any & {imageData: SearchResult}) {
+export function GalleryImage(props :any & {imageData:SearchResult; path: string}) {
     
-    const [transition, starttransition] = useTransition();
+    const [transition, startTransition] = useTransition();
 
     const {imageData} = props;
 
-    const isFavorite = imageData.tags.includes("favorite");
+    const isFavorited = imageData.tags.includes("favorite");
 
-    return <div className="relative">
-            <CldImage {...props} src={imageData.public_id}/>
-            {isFavorite ? 
-                <FullHeart 
-                onClick={() => {
-                  starttransition(() => {
-                  SetkAsFavoriteAction(imageData.public_id, false);
-                  });
-                }}
-                className="absolute top-2 right-2 hover:text-white text-red-500 cursor-pointer"
-            />
+    return (
+        <div className="relative">
+                <CldImage {...props} src={imageData.public_id}
+                />
+                {isFavorited ? 
+                    <FullHeart 
+                        onClick={() => {
+                          startTransition(() => {
+                            SetkAsFavoriteAction(imageData.public_id, false, props.path);
+                          });
+                        }}
+                        className="absolute top-2 right-2 hover:text-white text-red-500 cursor-pointer"
+                    />
+
+                    :
+                    
+                    <Heart 
+                        onClick = {() => {
+                           startTransition(() => {
+                            SetkAsFavoriteAction(imageData.public_id, true, props.path);
+                          });
+                        }}
+                        className="absolute top-2 right-2 hover:text-red-500 cursor-pointer"
+                    />
+                }
                 
-                :
-                
-                <Heart 
-                onClick={() => {
-                    starttransition(() => {
-                  SetkAsFavoriteAction(props.public_id, true);
-                  });
-                }}
-                className="absolute top-2 right-2 hover:text-red-500 cursor-pointer"
-            />
-            }
-            
-        </div>
+        </div> );
 }
+
